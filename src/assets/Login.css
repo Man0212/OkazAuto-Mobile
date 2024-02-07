@@ -1,0 +1,165 @@
+
+a {
+  text-decoration: none;
+  color: #1a73e8;
+  display: block;
+  font-size: 14px;
+}
+.container {
+  max-width: 450px;
+  margin: auto;
+  border-radius: 10px;
+  padding: 1rem;
+  height: 500px;
+  /* text-align: center; */
+}
+.button-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: fixed;
+  bottom: 0;
+  width: 93%;
+  padding: 10px;
+  margin-bottom: 60px;
+}
+
+.back-btn {
+  font-size: 14px;
+  cursor: pointer;
+  padding: 5px 20px;
+  color: rgb(138, 138, 138);
+}
+
+.next-btn {
+  cursor: pointer;
+  background-color: #007bff; /* Ajoutez la couleur de fond souhaitée pour le bouton "NEXT" */
+  color: #fff; /* Ajoutez la couleur de texte souhaitée pour le bouton "NEXT" */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+.top-content {
+  text-align: center;
+}
+img {
+  width: 80px;
+  margin: 10px 0;
+}
+h2 {
+  font-size: 20px;
+  font-weight: 100;
+  margin-bottom: 10px;
+}
+.heading {
+  margin-bottom: 30px;
+}
+.ligne {
+  display: grid;
+  grid-template-columns: 45% 10% 45%;
+}
+input {
+  display: block;
+  border: 1px solid rgb(184, 184, 184);
+  font-size: 16px;
+  width: 100%;
+  height: 55px;
+  padding: 0 15px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+  outline: none;
+  border-radius: 3px;
+  position: relative;
+  color: grey;
+}
+.top-content p{
+    font-size: 30px;
+    font-weight: 600;
+}
+.top-content p span{
+    color: #1879c9;
+}
+.inputs {
+  position: relative;
+}
+.input-label {
+  position: absolute;
+  top: 15px;
+  font-size: 1.1rem;
+  left: 14px;
+  color: grey;
+  font-weight: 100;
+  transition: 0.1s ease;
+  padding: 0 5px;
+}
+
+input:focus ~ .input-label {
+  top: -7px;
+  color: #eee;
+  font-size: 13px;
+  z-index: 2;
+}
+input:target ~ .input-label {
+  top: -7px;
+  color: #eee;
+  font-size: 13px;
+  z-index: 2;
+}
+
+/* Lorsque l'input a le focus ou a une valeur non vide */
+input:focus ~ .input-label,
+input:not(:placeholder-shown) ~ .input-label {
+  top: -7px;
+  color: rgb(100, 99, 99);
+  font-size: 11px;
+  background-color: rgb(255, 255, 255);
+  z-index: 2;
+}
+
+
+.input:focus {
+  border: 2px solid #1a73e8;
+}
+.input{
+  color: rgb(90, 90, 90);
+}
+.link-btn {
+  margin-bottom: 2rem;
+}
+.color {
+  color: rgb(90, 90, 90);
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+.create-btn {
+  border: none;
+  background-color: transparent;
+  color: #1a73e8;
+  font-weight: bold;
+  cursor: pointer;
+  height: 35px;
+  padding: 10px 5px;
+}
+.next-btn {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  height: 35px;
+  padding: 0 25px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.create-btn:hover {
+  background-color: #e8f2ff6e;
+  /* transition: 0.2s all ease-in; */
+}
+.next-btn:hover {
+  background-color: #1864c9;
+}

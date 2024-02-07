@@ -1,0 +1,75 @@
+import React from 'react';
+import {
+  IonContent,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonMenu,
+  IonMenuToggle,
+  IonNote,
+  IonButton,
+} from '@ionic/react';
+
+import { useLocation } from 'react-router-dom';
+import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, logOutOutline, logOutSharp } from 'ionicons/icons';
+import '../assets/Menu.css';
+
+interface AppPage {
+  url: string;
+  iosIcon: string;
+  mdIcon: string;
+  title: string;
+}
+
+const appPages: AppPage[] = [
+  {
+    title: 'Login',
+    url: '/Login',
+    iosIcon: mailOutline,
+    mdIcon: mailSharp,
+  },
+  {
+    title: 'Sign',
+    url: '/Sign',
+    iosIcon: paperPlaneOutline,
+    mdIcon: paperPlaneSharp,
+  },
+];
+
+const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+
+const Menu: React.FC = () => {
+  const location = useLocation();
+
+  const handleLogout = () => {
+    console.log('Déconnexion effectuée');
+  };
+
+  return (
+    <IonMenu contentId="main" type="overlay" side='end'>
+      <IonContent>
+        <IonList id="Login-list">
+          <IonListHeader>Login</IonListHeader>
+          <IonNote>hi@ionicframework.com</IonNote>
+          {appPages.map((appPage, index) => (
+            <IonMenuToggle key={index} autoHide={false}>
+              <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
+                <IonIcon aria-hidden="true" size='small' slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
+                <IonLabel>{appPage.title}</IonLabel>
+              </IonItem>
+            </IonMenuToggle>
+          ))}
+        </IonList>
+        
+        <IonButton expand="full" fill="clear" onClick={handleLogout} className="logout-button" style={{ bottom: '0', position: 'absolute' }}>
+          <IonIcon slot="start" ios={logOutOutline} md={logOutSharp} />
+          Déconnexion
+        </IonButton>
+      </IonContent>
+    </IonMenu>
+  );
+};
+
+export default Menu;

@@ -18,7 +18,7 @@ const Login: React.FC = () => {
       </div>
       <br/>
       <div className="inputs">
-        <input type="pass" id="pass" className="input" />
+        <input type="password" id="pass" className="input" />
         <label htmlFor="pass" className="input-label">
           password
         </label>

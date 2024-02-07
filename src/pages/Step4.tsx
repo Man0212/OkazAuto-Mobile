@@ -55,8 +55,6 @@ const Step4: React.FC = () => {
         <br />
         <input type="file" accept="image/*" multiple style={{height:'30px',backgroundColor:'#eee'}}/>
 
-
-
         <div className='button-footer'>
         <span onClick={() => history.goBack()} className="back">
             Back

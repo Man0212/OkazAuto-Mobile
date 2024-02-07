@@ -46,7 +46,7 @@ const Voiture: React.FC = ({details}) => {
               <span>5</span>
             </p>
 
-            <Link className="view" to={{ pathname: "/DetailsAnnonces" }}>
+            <Link className="view" to={{ pathname: "/details-annonces" }}>
               <View />
             </Link>
             <img

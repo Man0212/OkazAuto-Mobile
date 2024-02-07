@@ -25,6 +25,7 @@ import { IonHeader, IonToolbar, IonButtons, IonMenuButton, IonItem, IonIcon } fr
 
 import './theme/variables.css';
 import Annonces from './pages/Annonces';
+import DetailsAnnonces from './pages/DetailsAnnonces';
 
 setupIonicReact();
 
@@ -64,6 +65,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/annonces" exact={true}>
               <Annonces />
+            </Route>
+            <Route path="/details-annonces" exact={true}>
+              <DetailsAnnonces />
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>

@@ -49,13 +49,10 @@ const Step3: React.FC = () => {
   const history = useHistory();
 
   const onSubmit: SubmitHandler<FormStep3> = (data: FormStep3) => {
-    // Traitement des données du formulaire
     WizardStore.update((s) => {
       s.progress = 66;
       s.Description = description;
       s.Equipement = selectedValues.map((value) => value.title);
-      // Gérer les fichiers sélectionnés ici
-      // data.photoFiles contiendra les fichiers sélectionnés
     });
     history.push('/step-4');
   };
@@ -70,7 +67,8 @@ const Step3: React.FC = () => {
           label="description"
           labelPlacement="floating"
           fill="outline"
-          value={WizardStore.useState((s) => s.Description)}
+          value={description}
+          defaultValue={WizardStore.useState((s) => s.Description)}
           onIonChange={(e) => handleChangeDescription(e)}
           placeholder="description . . ."
           style={{ width: '100%', height: '150px', marginBottom: '20px' , color:'grey' }}
@@ -85,7 +83,7 @@ const Step3: React.FC = () => {
 
 
         <div className='button-footer'>
-          <span onClick={() => history.goBack()} className="back-btn">
+          <span onClick={() => history.goBack()} className="back">
             Back
           </span>
           <button type="submit" className="next-btn" onClick={handleSubmit(onSubmit)}>

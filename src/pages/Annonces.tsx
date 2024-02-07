@@ -69,6 +69,7 @@ const Annonces: React.FC = () => {
                     <Voiture key={index} details={details} />
                   ))}
                 </div>
+                <div style={{ height: '60px' }}></div>
               </div>
             </div>
           </div>

@@ -37,11 +37,14 @@ const Login: React.FC = () => {
         Learn More
       </a>
 
-      <div className="btn-group">
-        <button className="create-btn">
+      <div >
+        <button style={{ background: 'none' }}>
           <Link to="/Login">already have an account</Link>
         </button>
-        <button className="next-btn">Next</button>
+
+        <button type="submit" className="next-btn" style={{ float: 'right' }}>
+        <Link to="/Login" style={{color:'white'}}>Sign</Link>
+        </button>
       </div>
     </div>
   );

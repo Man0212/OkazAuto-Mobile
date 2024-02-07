@@ -30,12 +30,13 @@ const Login: React.FC = () => {
         Learn More
       </a>
 
-      <div className="btn-group">
-        <button className="create-btn">
-          <Link to="/Sign">create account</Link>
+      <div >
+        <button style={{ background: 'none' }}>
+          <Link to="/Sign">create an account</Link>
         </button>
-        <button className="next-btn">
-        <Link to="/Step-1" style={{ color :'white'}}>valider</Link>
+
+        <button type="submit" className="next-btn" style={{ float: 'right' }}>
+        <Link to="/Step-1" style={{color:'white'}}>Login</Link>
         </button>
       </div>
     </div>

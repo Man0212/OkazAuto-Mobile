@@ -89,7 +89,7 @@ const Step1: React.FC = () => {
 
 
         <footer className='button-footer'>
-          <span onClick={() => history.goBack()} className="back-btn">
+          <span onClick={() => history.goBack()} className="back">
             Back
           </span>
           <button type="submit" className="next-btn" onClick={handleSubmit(onSubmit)}>

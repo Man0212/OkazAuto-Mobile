@@ -53,12 +53,12 @@ const Step4: React.FC = () => {
           </label>
         </div>
         <br />
-        <input type="file" accept="image/*" multiple style={{height:'50px'}}/>
+        <input type="file" accept="image/*" multiple style={{height:'30px',backgroundColor:'#eee'}}/>
 
 
 
         <div className='button-footer'>
-        <span onClick={() => history.goBack()} className="back-btn">
+        <span onClick={() => history.goBack()} className="back">
             Back
           </span>
           <button type="submit" className="next-btn" onClick={handleSubmit(onSubmit)}>

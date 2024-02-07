@@ -1,0 +1,17 @@
+.mes-annonces{
+    font-size:14px;
+}
+.mes-annonces .annonce-filtre {
+    background-color: #f4f4f4;
+    height: max-content;
+}
+.mes-annonces .page-annonce{
+    padding: 0px 5%;
+}
+.mes-annonces .filtre {
+    border-radius: 5px;
+}
+.mes-annonces .annonce {
+    background-color: white;
+    border-radius: 2px;
+}

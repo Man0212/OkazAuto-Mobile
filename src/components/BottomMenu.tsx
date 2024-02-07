@@ -21,11 +21,11 @@ function BottomMenu() {
         padding: "5px",  
       }}
     >
-      <Link to="/home" style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Link to="/annonces" style={{ textDecoration: 'none', color: 'inherit' }}>
         <Home style={{ fill: 'gray' , marginLeft:'20px'}} />
       </Link>
 
-      <Link to="/add" style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Link to="/Step-1" style={{ textDecoration: 'none', color: 'inherit' }}>
         <Add style={{ fill: 'gray' }} />
       </Link>
 

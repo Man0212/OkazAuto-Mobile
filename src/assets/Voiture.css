@@ -1,0 +1,136 @@
+.car .voiture {
+    height: max-content;
+    min-width: 100%;
+    margin-top: 20px;
+}
+
+.car {
+    font-size: 14px;
+}
+
+.camera {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    font-size: 15px;
+    z-index: 2;
+    cursor: pointer;
+    background: #ffffff8a;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+.view {
+    position: absolute;
+    bottom: 4%;
+    right: 5%;
+    font-size: 15px;
+    z-index: 2;
+    cursor: pointer;
+    background: #ffffff8a;
+    color: rgb(49, 49, 49);
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+
+.camera span {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px;
+}
+
+.status {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    color: #ffffffc4;
+    font-size: 1rem;
+    z-index: 2;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+
+.voiture-prix {
+    font-size: 17px;
+    width: max-content;
+    padding: 1px 12px;
+    padding-top: 2px;
+    margin-top: 15px;
+    background: #E8AA42;
+    color: rgb(243, 243, 243);
+    border-radius: 2px;
+}
+
+.car .voiture-image {
+    border-radius: 5px;
+    position: relative;
+}
+
+.car .voiture-voir {
+    border-left: 2px solid #f4f4f4;
+}
+
+.car .btn {
+    width: 100%;
+    margin: 5px 0px;
+}
+
+.car .voiture-description {}
+
+.car .voiture-titre {
+    font-size: 16px;
+    color: rgb(0, 89, 255);
+    font-weight: 500;
+}
+
+.car .model-marque span {
+    margin-top: 10px;
+    background-color: #cdcdcd;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.car .model-marque {
+    margin-top: 10px;
+}
+
+.car .table-description {
+    margin-top: 5px;
+}
+
+.car .table-description table {
+    width: 100%;
+    border: none;
+}
+
+.car .table-description table td {
+    height: 5px;
+}
+
+.car .table-header {
+    font-weight: bold;
+}
+
+.car .voiture-image img {
+    background: cover;
+    width: 100%;
+    height: 185px;
+    object-fit: cover;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.voiture .supprimer {
+    padding: 5px 50px;
+    border-radius: 5px;
+    background-color: rgb(255, 56, 56);
+    color: rgb(255, 255, 255);
+    border: none;
+}
+
+.voiture .supprimer:hover {
+    background-color: rgb(255, 255, 255);
+    color: red;
+    border: 2px solid red;
+}

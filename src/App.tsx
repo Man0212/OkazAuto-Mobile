@@ -56,6 +56,9 @@ const App: React.FC = () => {
             <Route path="/step-4" exact={true}>
               <Step4 />
             </Route>
+            <Route path="/annonces" exact={true}>
+              <Annonces />
+            </Route>
             <Route path="/confirmation" exact={true}>
               <Confirmation />
             </Route>

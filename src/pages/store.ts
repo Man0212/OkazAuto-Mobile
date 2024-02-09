@@ -57,6 +57,7 @@ export interface FormStep3 {
 export interface FormStep4 {
   Etat: number | undefined;
   Prix: number | undefined;
+  Images: string[] | undefined;
 }
 
 export type FormValues = {
@@ -76,6 +77,7 @@ export const WizardStore = new Store<FormValues>({
   Place: 0,
   Porte: 0,
   Equipement: [],
+  Images: [],
   Description: "",
   Etat: 0,
   Prix: 0,

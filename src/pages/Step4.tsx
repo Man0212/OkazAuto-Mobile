@@ -27,7 +27,9 @@ const Step4: React.FC = () => {
       s.progress = 66;
       s.Etat = data.Etat as number;
       s.Prix = data.Prix as number;
+      // s.Images = data.Images as [];
     });
+    console.log("ate");
     history.push('/Confirmation');
   };
 
@@ -53,7 +55,7 @@ const Step4: React.FC = () => {
           </label>
         </div>
         <br />
-        <input type="file" accept="image/*" multiple style={{height:'30px',backgroundColor:'#eee'}}/>
+        <input type="file" accept="image/*" multiple style={{height:'30px',backgroundColor:'#eee'}} {...register('Images', { required: true })}/>
 
         <div className='button-footer'>
         <span onClick={() => history.goBack()} className="back">

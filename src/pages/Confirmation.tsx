@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   IonContent,
   IonItem,
@@ -9,8 +9,12 @@ import {
 import { useHistory  } from "react-router-dom";
 import { WizardStore } from "./store";
 import annonceService from '../services/annonce.service';
+// import { getFirebase } from 'firebase/app';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 const Confirmation: React.FC = () => {
+  // const firebase = getFirebase();
+  const fileInputRef = useRef(null);
   const [loading, setLoading] = useState<Boolean>(false);
   const history = useHistory();
   const state = WizardStore.useState((s) => s);
@@ -37,9 +41,41 @@ const Confirmation: React.FC = () => {
     history.push('/Step-1');
   };
 
+  // const uploadImage=async ()=>{
+  //   const uploadedFiles = state.Images;
+  //   if (!uploadedFiles || uploadedFiles.length === 0) return;
+
+  //   const storage = getStorage(firebase);
+
+  //   try {
+
+  //     const uploadPromises = Array.from(uploadedFiles).map(async (file) => {
+  //       const storageRef = ref(storage, `images/${file.name}`);
+  //       const uploadTask = uploadBytesResumable(storageRef, file);
+  //       await uploadTask;
+
+  //       // Get the download URL after upload is complete
+  //       const downloadURL = await getDownloadURL(storageRef);
+  //       console.log(`Download URL for ${file.name}:`, downloadURL);
+
+  //       return downloadURL;
+  //     });
+
+  //     const downloadURLs = await Promise.all(uploadPromises);
+
+  //     console.log('All Download URLs:', downloadURLs);
+
+  //     alert("Successfully uploaded pictures!");
+  //   } catch (error) {
+  //     console.error("Error uploading pictures", error);
+  //     alert("Error uploading pictures. Please try again.");
+  //   } 
+  // }
+
   const handleSubmit=async ()=>{
     setLoading(true);
     try {
+      // await uploadImage();
       const response = await annonceService.create(annonce);
       if (response.success) {
 

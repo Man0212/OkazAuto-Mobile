@@ -18,7 +18,6 @@ export default function getFirebase() {
     instance = initializeApp(firebaseConfig);
     return instance;
   }
-
   return null;
 }
 

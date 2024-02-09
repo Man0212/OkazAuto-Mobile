@@ -9,9 +9,11 @@ import {
 import { useHistory  } from "react-router-dom";
 import { WizardStore } from "./store";
 import annonceService from '../services/annonce.service';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { firebaseStorage } from '../services/data-service';
 
 const Confirmation: React.FC = () => {
-  // const firebase = getFirebase();
+  const storage = firebaseStorage;
   const fileInputRef = useRef(null);
   const [loading, setLoading] = useState<Boolean>(false);
   const history = useHistory();
@@ -39,22 +41,38 @@ const Confirmation: React.FC = () => {
     history.push('/Step-1');
   };
 
-  const uploadFile=()=>{
-    const selectedFiles = state.Images;
-    selectedFiles?.forEach(selectedFile => {
-      const imageRef = firebaseStorage().ref(`/images/${selectedFile.name}`);
-      imageRef.put(selectedFile).then(async(snapShot) => {
-        const url = await snapShot.ref.getDownloadURL();
-        annonce.vehicule.images.push(url);
-      })
-    });
+  const uploadFile=async ()=>{
+    try {
+      const uploadPromises = Array.from(state.Images).map(async (file) => {
+        const storageRef = ref(storage, `images/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        await uploadTask;
+
+        // Get the download URL after upload is complete
+        const downloadURL = await getDownloadURL(storageRef);
+        console.log(`Download URL for ${file.name}:`, downloadURL);
+
+        return downloadURL;
+      });
+
+      const downloadURLs = await Promise.all(uploadPromises);
+
+      console.log('All Download URLs:', downloadURLs);
+
+      alert("Successfully uploaded pictures!");
+    } catch (error) {
+      console.error("Error uploading pictures", error);
+      alert("Error uploading pictures. Please try again.");
+      throw error;
+    } finally {
+    }
   }
 
 
   const handleSubmit=async ()=>{
     setLoading(true);
     try {
-      // uploadFile();
+      await uploadFile();
       const response = await annonceService.create(annonce);
       if (response.success) {
         history.push('/annonces');
@@ -122,7 +140,6 @@ const Confirmation: React.FC = () => {
           <IonItem>
             Etat du véhicule: {state.Etat}
           </IonItem>
-
           <div className="btn-group" style={{ padding: '10px' }}>
             <button className="create-btn" onClick={handleBack}>
               annuler

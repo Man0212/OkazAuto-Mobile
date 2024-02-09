@@ -1,0 +1,6 @@
+BackOffice: varotravam-admin.netlify.app
+Front-office: varotravam.netlify.app
+
+https://github.com/tiavina-benja-mano-christelle/varotravam-backend
+https://github.com/tiavina-benja-mano-christelle/varotravam-frontoffice
+https://github.com/tiavina-benja-mano-christelle/varotravam-backoffice

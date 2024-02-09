@@ -10,7 +10,7 @@ import Chip from '@mui/material/Chip';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-const Equipement = ({ options, selectedValues, onSelectionChange, onClearSelection }) => {
+const Equipement = ({ options, selectedValues, onSelectionChange, onClearSelection, handleChange=()=>{} }) => {
   const handleSelectionChange = (event, values) => {
     onSelectionChange(values);
   };
@@ -32,12 +32,12 @@ const Equipement = ({ options, selectedValues, onSelectionChange, onClearSelecti
         getOptionLabel={(option) => option.title}
         renderOption={(props, option, { selected }) => (
           <li {...props} style={{ display: 'flex', alignItems: 'center', padding: '5px', width: '100%' }}>
-            <Checkbox icon={icon} checkedIcon={checkedIcon} style={{ marginRight: '8px' }} checked={selected || uniqueSelectedValues.some((val) => val.title === option.title)} />
+            <Checkbox onChange icon={icon} checkedIcon={checkedIcon} style={{ marginRight: '8px' }} checked={selected || uniqueSelectedValues.some((val) => val.title === option.title)} />
             {option.title}
           </li>
         )}
         value={uniqueSelectedValues}
-        onChange={handleSelectionChange}
+        onChange={(event,value)=>handleSelectionChange(event, value)}
         defaultValue={selectedValues}
         renderInput={(params) => (
           <TextField {...params} label="Equipement" placeholder="equipement...." />

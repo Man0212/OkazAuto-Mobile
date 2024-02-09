@@ -60,7 +60,7 @@ function BottomMenu() {
       </Link>
 
       <IonMenuButton slot="start">
-        <IonIcon icon={person} style={{ fill: 'gray',marginRight:'12px' }} />
+        <IonIcon icon={person} style={{ fill: 'gray',marginRight:'12px', fontSize:'26px' }} />
       </IonMenuButton>
     </div>
   );

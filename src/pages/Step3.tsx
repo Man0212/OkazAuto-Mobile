@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
-import { WizardStore, FormStep3 } from './store';
+import { WizardStore, FormStep3, Result } from './store';
 import Equipement from '../components/Equipement';
 import Progress from '../components/Progress';
 import BottomMenu from '../components/BottomMenu';
 import { IonItem, IonList, IonTextarea } from '@ionic/react';
 import { Description } from '@mui/icons-material';
+import elementService from '../services/element.service';
 
 const Step3: React.FC = () => {
-  const Equipements = [
-    { title: 'Bluetooh' },
-    { title: 'radio' },
-    { title: 'camera' },
-    { title: 'antenne' },
-    { title: 'fenetre' },
-    { title: 'fil' },
-  ];
+  
+  const [equipements, setEquipements] = useState<any[]>([]); const fetchData=()=>{
+    elementService.equipements()
+    .then((result: Result) => { 
+      if (result.success) {
+        let tempData = result.data;
+        tempData.forEach((element: any) => { 
+          element.title = element.nom; 
+        });
+        setEquipements(tempData); 
+      }
+    })
+    .catch((error: Error) => console.log(error));
+  }
+
+  useEffect(()=>{
+    fetchData();
+  }, [])
 
   const {
     register,
@@ -30,11 +41,11 @@ const Step3: React.FC = () => {
 
   const [selectedValues, setSelectedValues] = React.useState([]);
 
-  const handleSelectionChange = (values) => {
+  const handleSelectionChange = (values:any) => {
     setSelectedValues(values);
   };
 
-  const handleClearSelection = (valueToRemove) => {
+  const handleClearSelection = (valueToRemove:any) => {
     setSelectedValues((prevSelectedValues) =>
       prevSelectedValues.filter((value) => value.title !== valueToRemove.title)
     );
@@ -43,7 +54,6 @@ const Step3: React.FC = () => {
   const [description, setDescription] = React.useState('');
   const handleChangeDescription = (e) => {
     setDescription(e.target.value);
-    console.log(e.target.value);
   };
 
   const history = useHistory();
@@ -75,7 +85,7 @@ const Step3: React.FC = () => {
         />
 
         <Equipement
-          options={Equipements}
+          options={equipements}
           selectedValues={selectedValues}
           onSelectionChange={handleSelectionChange}
           onClearSelection={handleClearSelection}

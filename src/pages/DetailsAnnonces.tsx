@@ -1,22 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../assets/Voiture.css';
 import LocalOffer from '@mui/icons-material/LocalOffer';
 import v1 from '../assets/v5.jpg';
-import { IonContent, IonPage } from '@ionic/react';
+import { IonContent, IonModal, IonPage } from '@ionic/react';
 import { Padding } from '@mui/icons-material';
 import BottomMenu from '../components/BottomMenu';
+import { useParams } from 'react-router';
+import annonceService from '../services/annonce.service';
+import img from '../assets/default.jpg';
 
 const DetailsAnnonces: React.FC = () => {
+    const {id} = useParams<any>();
 
-    const details = {
-        marque: "Mercedes", modele: "C63", kilometrage: "20  000km", puissance: "300 CV", place: 5,
-        porte: 4, consommation: "8 L/100km", etat_vehicule: "Occasion", transmission: "Automatique",
-        energie: "Essence", categorie: "Sedan", freinage: "ABS", couleur: "Noir",
-        equipements: "Climatisation, GPS, Caméra de recul", images: v1,
-        annonce_id: 1, prix_initial: 25000, date_publication: "2024-01-12", date_fermeture: "2024-02-12",
-        etat_annonce: "Disponible", description: "Une superbe voiture Mercedes-Benz C63 de l'année  2017 en excellent état.",
-        utilisateur_id: 1, status: 0
-    };
+    const detail = {
+        etat: 0,
+        prixInitial: 0,
+        description: '',
+        vehicule: {
+            kilometrage: "20  000km", 
+            puissance: "300 CV", 
+            place: 5,
+            porte: 4, 
+            consommation: 0, 
+            etat: 0, 
+            transmission: "",
+            energie: "", 
+            categorie: "", 
+            freinage: "", 
+            couleur: "",
+            images: [""],
+            equipements: []
+        }
+    }
+
+    const [annonce, setAnnonce] = useState<any>(detail);
+    const fetchData = ()=>{
+        annonceService.details(id)
+        .then(result => {
+            if (result.success) {
+                setAnnonce(result.data);
+            }
+        })
+        .catch(error => console.log(error)); 
+    }
+    useEffect(()=> fetchData(), []);
+
+
+    
 
     const [isStarActive, setStarActive] = useState(false);
 
@@ -24,26 +54,80 @@ const DetailsAnnonces: React.FC = () => {
         setStarActive(!isStarActive);
     };
 
+
     const statusColor = {
         0: "tomato",
-        10: "#27c434"
-    };
-
+        5: "#27c434",
+        10: "blue",
+        15: "gray",
+        20: "green",
+      }
+    
     const statusText = {
-        0: "en vente",
-        10: "en ettente"
-    };
+        0: "Refusé",
+        5: "En attente",
+        10: "Disponible",
+        15: "Indisponible",
+        20: "Vendue"
+    }
 
     const renderRows = () => {
-        return Object.entries(details).map(([key, value], index) => {
-            return (
-                <tr key={index}>
-                    <td><strong>{key}</strong></td>
-                    <td>{value}</td>
+        return (
+            <>
+                <tr>
+                    <td><strong>Marque</strong></td>
+                    <td>{annonce.vehicule.marque}</td>
                 </tr>
-            );
-        });
+                <tr>
+                    <td><strong>Modele</strong></td>
+                    <td>{annonce.vehicule.modele}</td>
+                </tr>
+                <tr>
+                    <td><strong>Transmission</strong></td>
+                    <td>{annonce.vehicule.transmission}</td>
+                </tr>
+                <tr>
+                    <td><strong>Energie</strong></td>
+                    <td>{annonce.vehicule.energie}</td>
+                </tr>
+                <tr>
+                    <td><strong>Catégorie</strong></td>
+                    <td>{annonce.vehicule.categorie}</td>
+                </tr>
+                <tr>
+                    <td><strong>Freinage</strong></td>
+                    <td>{annonce.vehicule.freinage}</td>
+                </tr>
+                <tr>
+                    <td><strong>Consommation</strong></td>
+                    <td>{annonce.vehicule.consommation}</td>
+                </tr>
+                <tr>
+                    <td><strong>Kilométrage</strong></td>
+                    <td>{annonce.vehicule.kilometrage}</td>
+                </tr>
+                <tr>
+                    <td><strong>Nombre de porte</strong></td>
+                    <td>{annonce.vehicule.porte}</td>
+                </tr>
+                <tr>
+                    <td><strong>Nombre de place</strong></td>
+                    <td>{annonce.vehicule.place}</td>
+                </tr>
+                <tr>
+                    <td><strong>Couleur</strong></td>
+                    <td>{annonce.vehicule.couleur}</td>
+                </tr>
+            </>
+        );
     };
+
+    const handleUpdate= async ()=>{
+        const response = await annonceService.updateState(annonce.id);
+        if (response.success) {
+
+        }
+    }
 
     return (
         <>
@@ -51,19 +135,18 @@ const DetailsAnnonces: React.FC = () => {
                 <div className="car" style={{ width: '100%', padding: '20px' }}>
                     <div className="voiture row">
                         <div className={"voiture-image col-lg-12"}>
-                            <img src={details.images} alt="Car image" />
-                            <span className='status' style={{ backgroundColor: statusColor[details.status], top:'4%' }}>{statusText[details.status]} </span>
+                            <img src={annonce.vehicule.images === null ? img : annonce.vehicule.images[0]} alt="Car image" />
+                            <span className='status' style={{ backgroundColor: statusColor[annonce.etat], top:'4%' }}>{statusText[annonce.etat]} </span>
                             <div className="row">
-                                <img src={details.images} alt="Car image" style={{ width: '33.33%', height: '110px', padding: '7px' }} />
-                                <img src={details.images} alt="Car image" style={{ width: '33.33%', height: '110px', padding: '7px' }} />
-                                <img src={details.images} alt="Car image" style={{ width: '33.33%', height: '110px', padding: '7px' }} />
-                                <img src={details.images} alt="Car image" style={{ width: '33.33%', height: '110px', padding: '7px' }} />
+                                {annonce.vehicule.images!==null && annonce.vehicule.images.map((image, index) => 
+                                <img key={index} src={image} alt="Car image" style={{ width: '33.33%', height: '110px', padding: '7px' }} />
+                                )}
                             </div>
                         </div>
                         
                         
                         <div className="voiture-description col-lg-12 py-2">
-                            <div className="voiture-titre">{details.marque} {details.modele}
+                            <div className="voiture-titre">{annonce.vehicule.marque} {annonce.vehicule.modele}
                             </div>
 
                             <div className="table-description">
@@ -78,11 +161,13 @@ const DetailsAnnonces: React.FC = () => {
 
                         <div className="voiture-voir col-lg-12">
                             <div className="btn3 btn" style={{ fontSize: '14px', backgroundColor: '#c4c4c4' }}>
-                                20.000.000 MGA  <LocalOffer style={{ fontSize: '18px', marginTop: '-4px' }} />
+                                {annonce.prixInitial.toLocaleString()} MGA  <LocalOffer style={{ fontSize: '18px', marginTop: '-4px' }} />
                             </div>
-                            <div className="btn btn-primary" style={{ fontSize: '14px'}}>
-                                Marquer comme vendu
-                            </div>
+                            {(annonce.etat === 10 || annonce.etat === 5) && 
+                            <button className="btn btn-primary" style={{ fontSize: '14px'}} onClick={()=>handleUpdate()}>
+                                Marquer comme Indisponible
+                            </button>
+                            }
                         </div>
                     </div>
                 </div>

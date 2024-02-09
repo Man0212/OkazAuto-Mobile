@@ -12,9 +12,11 @@ import {
   IonButton,
 } from '@ionic/react';
 
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, logOutOutline, logOutSharp } from 'ionicons/icons';
 import '../assets/Menu.css';
+import userService from '../services/user.service';
+import { WizardStore } from '../pages/store';
 
 interface AppPage {
   url: string;
@@ -41,10 +43,31 @@ const appPages: AppPage[] = [
 const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
 const Menu: React.FC = () => {
+  const history = useHistory();
   const location = useLocation();
 
   const handleLogout = () => {
-    console.log('Déconnexion effectuée');
+    WizardStore.update((s) => {
+      s.Marque = undefined;
+      s.Model = undefined;
+      s.Categorie = undefined;
+      s.Energie = undefined;
+      s.Transmission = undefined;
+      s.Freinage = undefined;
+      s.Kilometrage = 0;
+      s.Puissance = 0;
+      s.Consommation = 0;
+      s.Place = 0;
+      s.Porte = 0;
+      s.Equipement = [];
+      s.Images = [];
+      s.Description = "";
+      s.Etat = 0;
+      s.Prix = 0;
+      s.progress = 10;
+    });
+    userService.logout();
+    history.push('/login');
   };
 
   return (
@@ -64,7 +87,7 @@ const Menu: React.FC = () => {
         </IonList>
         
         <IonButton expand="full" fill="clear" onClick={handleLogout} className="logout-button" style={{ bottom: '0', position: 'absolute' }}>
-          <IonIcon slot="start" ios={logOutOutline} md={logOutSharp} />
+          <IonIcon slot="start" ios={logOutOutline} md={logOutSharp}  />
           Déconnexion
         </IonButton>
       </IonContent>

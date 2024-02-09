@@ -27,7 +27,7 @@ const Step4: React.FC = () => {
       s.progress = 66;
       s.Etat = data.Etat as number;
       s.Prix = data.Prix as number;
-      // s.Images = data.Images as [];
+      s.Images = data.Images as [];
     });
     console.log("ate");
     history.push('/Confirmation');

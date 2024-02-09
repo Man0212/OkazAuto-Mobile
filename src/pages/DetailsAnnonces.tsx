@@ -125,7 +125,13 @@ const DetailsAnnonces: React.FC = () => {
     const handleUpdate= async ()=>{
         const response = await annonceService.updateState(annonce.id);
         if (response.success) {
-
+            annonceService.details(id)
+            .then(result => {
+                if (result.success) {
+                    setAnnonce(result.data);
+                }
+            })
+            .catch(error => console.log(error));
         }
     }
 
